@@ -18,10 +18,15 @@ public class Player extends Entity {
 
     String IMG_PATH = "/res/sprites/David/";
 
+    public final int screenX, screenY; // where we draw player on the screen
+
     public Player (GamePanel gp, KeyHandler keyH) {
 
         this.gp = gp;
         this.keyH = keyH;
+
+        screenX = gp.screenWidth/2 - (gp.tileSize/2);
+        screenY = gp.screenHeight/2 - (gp.tileSize/2);
 
         setDefaultValues();
         getPlayerImage();
@@ -30,8 +35,8 @@ public class Player extends Entity {
 
     public void setDefaultValues () {
         
-        x = 100;
-        y = 100;
+        worldX = gp.tileSize * 23;
+        worldY = gp.tileSize * 23;
         speed = 4;
         direction = "down";
 
@@ -62,16 +67,16 @@ public class Player extends Entity {
 
             if (keyH.upPressed == true) {
                 direction = "up";
-                y -= speed;
+                worldY -= speed;
             } else if (keyH.downPressed == true) {
                 direction = "down";
-                y += speed;
+                worldY += speed;
             } else if (keyH.leftPressed == true) {
                 direction = "left";
-                x -= speed;
+                worldX -= speed;
             } else if (keyH.rightPressed == true) {
                 direction = "right";
-                x += speed;
+                worldX += speed;
             }
     
             spriteCounter++;
@@ -128,7 +133,7 @@ public class Player extends Entity {
                 break;
         }
 
-        g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
     }
 
 
