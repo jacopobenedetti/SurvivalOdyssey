@@ -9,7 +9,11 @@ public class ITM_Key extends SuperItem {
         name = "Key";
         
         try {
+<<<<<<< HEAD
             image = ImageIO.read(getClass().getResourceAsStream(filePath + name + fileExtension));
+=======
+            image = ImageIO.read(getClass().getResourceAsStream(path + name + imageExtension));
+>>>>>>> d3039c5
         } catch (IOException e) {
             e.printStackTrace();
         }
