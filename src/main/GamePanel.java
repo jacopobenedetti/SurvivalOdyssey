@@ -22,6 +22,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
+<<<<<<< HEAD
     // World Settings
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
@@ -30,6 +31,14 @@ public class GamePanel extends JPanel implements Runnable {
 
 
 
+=======
+
+    //WORLD SETTING
+    public final int maxWorldCol = 50;
+    public final int maxWorldRow = 50;
+    public final int worldWidth = tileSize * maxScreenCol;
+    public final int worldHeight = tileSize * maxScreenRow;
+>>>>>>> d3039c5
 
     // FPS
     int FPS = 60;
@@ -40,9 +49,13 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public Player player = new Player(this, keyH);
+<<<<<<< HEAD
     public SuperItem itm[] = new SuperItem[10]; 
 
 
+=======
+    public SuperItem itm[] = new SuperItem[10];
+>>>>>>> d3039c5
 
 
     public GamePanel() {
@@ -58,8 +71,13 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
 
         aSetter.setItem();
+<<<<<<< HEAD
         
     } 
+=======
+
+    }
+>>>>>>> d3039c5
 
     public void startGameThread() {
 
@@ -104,17 +122,27 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
+<<<<<<< HEAD
         // TILE
         tileM.draw(g2);
 
         //ITEM
+=======
+        //TILE
+        tileM.draw(g2);
+
+>>>>>>> d3039c5
         for(int i = 0; i < itm.length; i++) {
             if(itm[i] != null) {
                 itm[i].draw(g2, this);
             }
         }
 
+<<<<<<< HEAD
         // PLAYER
+=======
+        //PLAYER
+>>>>>>> d3039c5
         player.draw(g2);
 
         g2.dispose();
