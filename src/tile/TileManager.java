@@ -30,11 +30,7 @@ public class TileManager {
 
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
         getTileImage();
-<<<<<<< HEAD
-        loadMap("/res/maps/world01.txt");
-=======
         loadMap(mapsPath + "world01.txt");
->>>>>>> d3039c5
 
     }
 
@@ -55,18 +51,6 @@ public class TileManager {
             tile[3].image = ImageIO.read(getClass().getResourceAsStream(tilePath + "sand.png"));
 
             tile[4] = new Tile();
-<<<<<<< HEAD
-            tile[4].image = ImageIO.read(getClass().getResourceAsStream(TILE_PATH + "wall.png"));
-            tile[4].collision = false;
-
-            tile[5] = new Tile();
-            tile[5].image = ImageIO.read(getClass().getResourceAsStream(TILE_PATH + "water.png"));
-            tile[5].collision = false;
-
-            tile[6] = new Tile();
-            tile[6].image = ImageIO.read(getClass().getResourceAsStream(TILE_PATH + "tree.png"));
-            tile[6].collision = false;
-=======
             tile[4].image = ImageIO.read(getClass().getResourceAsStream(tilePath + "wall.png"));
             tile[4].collision = true;
 
@@ -77,7 +61,6 @@ public class TileManager {
             tile[6] = new Tile();
             tile[6].image = ImageIO.read(getClass().getResourceAsStream(tilePath + "tree.png"));
             tile[6].collision = true;
->>>>>>> d3039c5
 
             tile[7] = new Tile();
             tile[7].image = ImageIO.read(getClass().getResourceAsStream(tilePath + "middleGrass_down.png"));
@@ -149,20 +132,6 @@ public class TileManager {
             int screenX = worldX - gp.player.worldX + gp.player.screenX;
             int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-<<<<<<< HEAD
-            if(worldX + gp.tileSize > gp.player.worldX - gp.player.screenX && 
-               worldX - gp.tileSize < gp.player.worldX + gp.player.screenX && 
-               worldY + gp.tileSize > gp.player.worldY - gp.player.screenY && 
-               worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
-
-                g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-
-
-            }
-
-            worldCol++;
-
-=======
             if(
                 worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
                 worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
@@ -174,7 +143,6 @@ public class TileManager {
             worldCol++;
 
 
->>>>>>> d3039c5
             if(worldCol == gp.maxWorldCol) {
                 worldCol = 0;
                 worldRow++;

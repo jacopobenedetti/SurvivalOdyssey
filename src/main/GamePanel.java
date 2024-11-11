@@ -12,7 +12,7 @@ import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
 
-    // Screen Settings
+    // SCREEN SETTINGS
     final int originalTileSize = 16; // 16 x 16 tile
     int scale = 3;
 
@@ -22,40 +22,26 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
-<<<<<<< HEAD
-    // World Settings
+
+    // WORLD SETTING
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
-    public final int worldWidth = tileSize * maxWorldCol;
-    public final int worldHeight = tileSize * maxWorldRow;
-
-
-
-=======
-
-    //WORLD SETTING
-    public final int maxWorldCol = 50;
-    public final int maxWorldRow = 50;
-    public final int worldWidth = tileSize * maxScreenCol;
-    public final int worldHeight = tileSize * maxScreenRow;
->>>>>>> d3039c5
 
     // FPS
     int FPS = 60;
 
+
+    // SYSTEM
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
-    Thread gameThread;
+    Sound sound = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
+    Thread gameThread;
+
+    // ENTITY AND ITEMS
     public Player player = new Player(this, keyH);
-<<<<<<< HEAD
-    public SuperItem itm[] = new SuperItem[10]; 
-
-
-=======
     public SuperItem itm[] = new SuperItem[10];
->>>>>>> d3039c5
 
 
     public GamePanel() {
@@ -71,13 +57,9 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
 
         aSetter.setItem();
-<<<<<<< HEAD
-        
-    } 
-=======
+        playMusic(0); // SOUNDTRACK
 
     }
->>>>>>> d3039c5
 
     public void startGameThread() {
 
@@ -122,30 +104,41 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-<<<<<<< HEAD
-        // TILE
-        tileM.draw(g2);
-
-        //ITEM
-=======
         //TILE
         tileM.draw(g2);
 
->>>>>>> d3039c5
         for(int i = 0; i < itm.length; i++) {
             if(itm[i] != null) {
                 itm[i].draw(g2, this);
             }
         }
 
-<<<<<<< HEAD
-        // PLAYER
-=======
         //PLAYER
->>>>>>> d3039c5
         player.draw(g2);
 
         g2.dispose();
+
+    }
+
+    // FOR THE SOUNDTRACK, IT NEVER ENDS
+    public void playMusic(int i) { 
+
+        sound.setFile(i);
+        sound.play();
+        sound.loop();
+
+    }
+
+    public void stopMusic() {
+
+        sound.stop();
+
+    }
+
+    public void playSoundEffect(int i) {
+
+        sound.setFile(i);
+        sound.play();
 
     }
 

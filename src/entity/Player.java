@@ -149,6 +149,7 @@ public class Player extends Entity {
             switch(itemName) {
                 case "Key":
 
+                    gp.playSoundEffect(1);
                     hasKey++;
                     gp.itm[i] = null;
 
@@ -159,7 +160,16 @@ public class Player extends Entity {
                     if(hasKey > 0) {
                         gp.itm[i] = null;
                         hasKey--;
+                        gp.playSoundEffect(4);
                     }
+
+                    break;
+                
+                case "Boots":
+
+                    speed += 1;
+                    gp.itm[i] = null;
+                    gp.playSoundEffect(2);
 
                     break;
 
