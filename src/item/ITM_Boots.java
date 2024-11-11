@@ -1,18 +1,21 @@
 package item;
 
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
+
+import main.GamePanel;
 
 public class ITM_Boots extends SuperItem {
 
-        public ITM_Boots() {
+    GamePanel gp;
+
+    public ITM_Boots(GamePanel gp) {
+
         name = "Boots";
         
         try {
             image = ImageIO.read(getClass().getResourceAsStream(path + name + imageExtension));
-
-            System.out.println();
+            uTool.scaleImage(image, gp.tileSize, gp.tileSize);
         } catch (IOException e) {
             e.printStackTrace();
         }

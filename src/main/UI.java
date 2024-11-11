@@ -28,7 +28,7 @@ public class UI {
     public UI(GamePanel gp) {
 
         this.gp = gp;
-        ITM_Key key = new ITM_Key();
+        ITM_Key key = new ITM_Key(gp);
         keyImage = key.image;
 
     }
