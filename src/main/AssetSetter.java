@@ -1,6 +1,7 @@
 package main;
 
 import item.ITM_Door;
+import item.ITM_Boots;
 import item.ITM_Chest;
 import item.ITM_Key;
 
@@ -43,6 +44,12 @@ public class AssetSetter {
         gp.itm[6] = new ITM_Chest();
         gp.itm[6].worldX = 10 * gp.tileSize;
         gp.itm[6].worldY = 7 * gp.tileSize;
+
+        
+        gp.itm[7] = new ITM_Boots();
+        gp.itm[7].worldX = 37 * gp.tileSize;
+        gp.itm[7].worldY = 42 * gp.tileSize;
+        
 
     }
     

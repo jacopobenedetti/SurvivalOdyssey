@@ -1,8 +1,5 @@
 package entity;
 
-import main.KeyHandler;
-
-
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -11,15 +8,19 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import main.KeyHandler;
+import res.ResourcePath;
 
 public class Player extends Entity {
     
     GamePanel gp;
     KeyHandler keyH;
+    String path = ResourcePath.DAVID_IMAGE_PATH;
 
-    String IMG_PATH = "/res/sprites/David/";
-
-    public final int screenX, screenY; // where we draw player on the screen
+    //WHERE WE DRAW PLAYER ON THE SCREEN
+    public final int screenX;
+    public final int screenY;
+    int hasKey = 0;
 
     public Player (GamePanel gp, KeyHandler keyH) {
 
@@ -32,9 +33,10 @@ public class Player extends Entity {
         solidArea = new Rectangle();
         solidArea.x = 8;
         solidArea.y = 16;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
         solidArea.width = 32;
         solidArea.height = 32;
-
 
         setDefaultValues();
         getPlayerImage();
@@ -43,8 +45,10 @@ public class Player extends Entity {
 
     public void setDefaultValues () {
         
+        //STARTING POSITION
         worldX = gp.tileSize * 23;
-        worldY = gp.tileSize * 23;
+        worldY = gp.tileSize * 21;
+
         speed = 4;
         direction = "down";
 
@@ -55,14 +59,14 @@ public class Player extends Entity {
 
         try {
 
-            up1 = ImageIO.read(getClass().getResourceAsStream(IMG_PATH + "david_up_1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream(IMG_PATH + "david_up_2.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream(IMG_PATH + "david_down_1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream(IMG_PATH + "david_down_2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream(IMG_PATH + "david_left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream(IMG_PATH + "david_left_2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream(IMG_PATH + "david_right_1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream(IMG_PATH + "david_right_2.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream(path + "david_up_1.png"));
+            up2 = ImageIO.read(getClass().getResourceAsStream(path + "david_up_2.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream(path + "david_down_1.png"));
+            down2 = ImageIO.read(getClass().getResourceAsStream(path + "david_down_2.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream(path + "david_left_1.png"));
+            left2 = ImageIO.read(getClass().getResourceAsStream(path + "david_left_2.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream(path + "david_right_1.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream(path + "david_right_2.png"));
 
         } catch(IOException e) {
             e.printStackTrace();
@@ -83,21 +87,42 @@ public class Player extends Entity {
                 direction = "right";
             }
 
-            //CHECK TILE COLLISION
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
-            //IF COLLISION IS FALSE, PLAYER CAN MOVE
+            int itmIndex = gp.cChecker.checkItem(this, true);
+            pickUpItem(itmIndex);
 
-            if(collisionOn == false) {
+
+            if (!collisionOn) {
 
                 switch (direction) {
-                    case "up": worldY -= speed; break;
-                    case "down": worldY += speed; break;
-                    case "left": worldX -= speed; break;
-                    case "right": worldX += speed; break;
-                }
 
+                    case "up":
+
+                        worldY -= speed;
+
+                        break;
+
+                    case "down":
+
+                        worldY += speed;
+
+                        break;
+
+                    case "left":
+
+                        worldX -= speed;
+
+                        break;
+
+                    case "right":
+                    
+                        worldX += speed;
+                    
+                        break;
+
+                }
             }
     
             spriteCounter++;
@@ -113,6 +138,44 @@ public class Player extends Entity {
         }
 
 
+    }
+
+    public void pickUpItem(int i) {
+
+        if(i != 999) {
+
+            String itemName = gp.itm[i].name;
+
+            switch(itemName) {
+                case "Key":
+
+                    gp.playSoundEffect(1);
+                    hasKey++;
+                    gp.itm[i] = null;
+
+                    break;
+
+                case "Door":
+
+                    if(hasKey > 0) {
+                        gp.itm[i] = null;
+                        hasKey--;
+                        gp.playSoundEffect(4);
+                    }
+
+                    break;
+                
+                case "Boots":
+
+                    speed += 1;
+                    gp.itm[i] = null;
+                    gp.playSoundEffect(2);
+
+                    break;
+
+            }
+
+        }
     }
 
     public void draw(Graphics2D g2) {
