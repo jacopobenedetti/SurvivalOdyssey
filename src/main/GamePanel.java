@@ -22,7 +22,6 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
-
     // WORLD SETTING
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
@@ -30,10 +29,9 @@ public class GamePanel extends JPanel implements Runnable {
     // FPS
     int FPS = 60;
 
-
     // SYSTEM
     TileManager tileM = new TileManager(this);
-    KeyHandler keyH = new KeyHandler(this);
+    public KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
     Sound soundEffect = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
@@ -46,15 +44,12 @@ public class GamePanel extends JPanel implements Runnable {
     public SuperItem itm[] = new SuperItem[10];
     public Entity npc[] = new Entity[10];
 
-
-
     // GAME STATE
 
     public int gameState;
     public final int playState = 1;
     public final int pauseState = 2;
-
-
+    public final int dialogueState = 3;
 
     public GamePanel() {
 
@@ -86,7 +81,7 @@ public class GamePanel extends JPanel implements Runnable {
     @Override
     public void run() {
 
-        double drawInterval = 1000000000/FPS;
+        double drawInterval = 1000000000 / FPS;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
@@ -109,18 +104,18 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
 
-        if(gameState == playState) {
-            //PLAYER
+        if (gameState == playState) {
+            // PLAYER
             player.update();
-            //NPC
-            for(int i = 0; i < npc.length; i++) {
-                if(npc[i] != null) {
+            // NPC
+            for (int i = 0; i < npc.length; i++) {
+                if (npc[i] != null) {
                     npc[i].update();
                 }
             }
         }
-        
-        if(gameState == pauseState) {
+
+        if (gameState == pauseState) {
             // nothing
         }
 
@@ -132,45 +127,44 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-        //DEBUG
+        // DEBUG
         long drawStart = 0;
-        if(keyH.checkDrawTime){
+        if (keyH.checkDrawTime) {
             drawStart = System.nanoTime();
         }
-        
 
-        //TILE
+        // TILE
         tileM.draw(g2);
 
-        //ITEMS
-        for(int i = 0; i < itm.length; i++) {
-            if(itm[i] != null) {
+        // ITEMS
+        for (int i = 0; i < itm.length; i++) {
+            if (itm[i] != null) {
                 itm[i].draw(g2, this);
             }
         }
 
-        //NPC
+        // NPC
         for (int i = 0; i < npc.length; i++) {
-            if(npc[i] != null) {
+            if (npc[i] != null) {
                 npc[i].draw(g2);
             }
         }
 
-        //PLAYER
+        // PLAYER
         player.draw(g2);
 
-        //UI
+        // UI
         ui.draw(g2);
 
-        //DEBUG
-        if(keyH.checkDrawTime) {
+        // DEBUG
+        if (keyH.checkDrawTime) {
 
             long drawEnd = System.nanoTime();
             long passed = drawEnd - drawStart;
             g2.setColor(Color.white);
             g2.drawString("Draw Time: " + passed, 10, 400);
             System.out.println("Draw Time: " + passed);
-            
+
         }
 
         g2.dispose();
@@ -178,7 +172,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     // FOR THE SOUNDTRACK, IT NEVER ENDS
-    public void playMusic(int i) { 
+    public void playMusic(int i) {
 
         music.setFile(i);
         music.play();
