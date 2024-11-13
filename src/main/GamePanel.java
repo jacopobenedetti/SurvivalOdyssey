@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
-import entity.Player;
+import entity.*;
 import item.SuperItem;
 import tile.TileManager;
 
@@ -33,7 +33,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     // SYSTEM
     TileManager tileM = new TileManager(this);
-    KeyHandler keyH = new KeyHandler();
+    KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
     Sound soundEffect = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
@@ -44,6 +44,16 @@ public class GamePanel extends JPanel implements Runnable {
     // ENTITY AND ITEMS
     public Player player = new Player(this, keyH);
     public SuperItem itm[] = new SuperItem[10];
+    public Entity npc[] = new Entity[10];
+
+
+
+    // GAME STATE
+
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
+
 
 
     public GamePanel() {
@@ -59,7 +69,10 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
 
         aSetter.setItem();
+        aSetter.setNPC();
         playMusic(0); // SOUNDTRACK
+        stopMusic();
+        gameState = playState;
 
     }
 
@@ -96,7 +109,20 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
 
-        player.update();
+        if(gameState == playState) {
+            //PLAYER
+            player.update();
+            //NPC
+            for(int i = 0; i < npc.length; i++) {
+                if(npc[i] != null) {
+                    npc[i].update();
+                }
+            }
+        }
+        
+        if(gameState == pauseState) {
+            // nothing
+        }
 
     }
 
@@ -116,9 +142,17 @@ public class GamePanel extends JPanel implements Runnable {
         //TILE
         tileM.draw(g2);
 
+        //ITEMS
         for(int i = 0; i < itm.length; i++) {
             if(itm[i] != null) {
                 itm[i].draw(g2, this);
+            }
+        }
+
+        //NPC
+        for (int i = 0; i < npc.length; i++) {
+            if(npc[i] != null) {
+                npc[i].draw(g2);
             }
         }
 
@@ -134,11 +168,9 @@ public class GamePanel extends JPanel implements Runnable {
             long drawEnd = System.nanoTime();
             long passed = drawEnd - drawStart;
             g2.setColor(Color.white);
-            for(int i = 0; i < 30; i++){
-                g2.drawString("Draw Time: " + passed, 10, 400);
-                System.out.println(i + "° " + "Draw Time: " + passed);
-            }
-
+            g2.drawString("Draw Time: " + passed, 10, 400);
+            System.out.println("Draw Time: " + passed);
+            
         }
 
         g2.dispose();

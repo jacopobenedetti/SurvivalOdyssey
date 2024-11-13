@@ -4,8 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import javax.imageio.ImageIO;
-
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
@@ -13,17 +11,18 @@ import res.ResourcePath;
 
 public class Player extends Entity {
     
-    GamePanel gp;
     KeyHandler keyH;
     String path = ResourcePath.DAVID_IMAGE_PATH;
     String imageExtension = ResourcePath.fileImageExtension;
+    UtilityTool uTool = new UtilityTool();
 
     //WHERE WE DRAW PLAYER ON THE SCREEN
     public final int screenX;
     public final int screenY;
-    public int hasKey = 0;
 
     public Player (GamePanel gp, KeyHandler keyH) {
+
+        super(gp);
 
         this.gp = gp;
         this.keyH = keyH;
@@ -57,31 +56,15 @@ public class Player extends Entity {
     
     public void getPlayerImage() {
 
-        up1 = setup("david_up_1");
-        up2 = setup("david_up_2");
-        down1 = setup("david_down_1");
-        down2 = setup("david_down_2");
-        left1 = setup("david_left_1");
-        left2 = setup("david_left_2");
-        right1 = setup("david_right_1");
-        right2 = setup("david_right_2");
-        
-    }
+        up1 = uTool.setupImage(path,"david_up_1", imageExtension, gp);
+        up2 = uTool.setupImage(path,"david_up_2", imageExtension, gp);
+        down1 = uTool.setupImage(path,"david_down_1", imageExtension, gp);
+        down2 = uTool.setupImage(path,"david_down_2", imageExtension, gp);
+        left1 = uTool.setupImage(path,"david_left_1", imageExtension, gp);
+        left2 = uTool.setupImage(path,"david_left_2", imageExtension, gp);
+        right1 = uTool.setupImage(path,"david_right_1", imageExtension, gp);
+        right2 = uTool.setupImage(path,"david_right_2", imageExtension, gp);
 
-    public BufferedImage setup(String imageName) {
-
-        UtilityTool uTool = new UtilityTool();
-        BufferedImage image = null;
-
-        try {
-
-            image = ImageIO.read(getClass().getResourceAsStream(path + imageName + imageExtension));
-            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return image;
     }
 
     public void update() {
@@ -98,12 +81,17 @@ public class Player extends Entity {
                 direction = "right";
             }
 
+            //CHECK TILE COLLISION
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
+            // CHECK ITEM COLLISON
             int itmIndex = gp.cChecker.checkItem(this, true);
             pickUpItem(itmIndex);
 
+            //CHECK NPC COLLISION
+            int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+            interactNPC(npcIndex);
 
             if (!collisionOn) {
 
@@ -155,51 +143,14 @@ public class Player extends Entity {
 
         if(i != 999) {
 
-            String itemName = gp.itm[i].name;
-
-            switch(itemName) {
-                case "Key":
-
-                    gp.playSoundEffect(1);
-                    hasKey++;
-                    gp.itm[i] = null;
-                    gp.ui.showMessage("You've got " + hasKey + " key now!");
-
-                    break;
-
-                case "Door":
-
-                    if(hasKey > 0) {
-                        gp.itm[i] = null;
-                        hasKey--;
-                        gp.playSoundEffect(4);
-                        gp.ui.showMessage("You opened the door!");
-                    } else {
-                        gp.ui.showMessage("You need a key to open this door!");
-                    }
-
-                    break;
-                
-                case "Boots":
-
-                    speed += 1;
-                    gp.itm[i] = null;
-                    gp.playSoundEffect(2);
-                    gp.ui.showMessage("Now you can walk faster!");
-
-                    break;
-
-                case "Chest":
-
-                    gp.ui.gameFinished = true;
-                    gp.stopMusic();
-                    gp.playSoundEffect(3);
-                    
-                    break;
-
-            }
-
+           
         }
+    }
+
+    public void interactNPC(int i) {
+        if(i != 999) {
+            System.out.println("Yout are hitting an NPC");
+        } 
     }
 
     public void draw(Graphics2D g2) {
@@ -239,7 +190,7 @@ public class Player extends Entity {
                     image = right2;
                 }
                 break;
-        }
+            }
 
         g2.drawImage(image, screenX, screenY, null);
     }

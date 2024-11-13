@@ -40,13 +40,13 @@ public class TileManager {
 
         try {
 
-            setup(0, "earth", false);
+            setup(0, "mars", false);
             setup(1, "grass", false);
-            setup(2, "mars", false);
+            setup(2, "earth", false);
             setup(3, "sand", false);
-            setup(4, "wall", true);
+            setup(4, "tree", true);
             setup(5, "water", false);
-            setup(6, "tree", true);
+            setup(6, "wall", true);
             setup(7, "middleGrass_down", false);
             setup(8, "middleGrass_up", false);
             setup(9, "middleGrass_left", false);
