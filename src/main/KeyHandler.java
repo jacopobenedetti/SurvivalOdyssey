@@ -68,13 +68,13 @@ public class KeyHandler implements KeyListener {
                     if(gp.ui.commandNum == 0) {
                         gp.gameState = gp.playState;
                     }
-                    if(gp.ui.commandNum == 1) {
+                    if(gp.ui.commandNum == 1) { //FIGHTER
                         gp.gameState = gp.playState;
                     }
-                    if(gp.ui.commandNum == 2) {
+                    if(gp.ui.commandNum == 2) { //THIEF
                         gp.gameState = gp.playState;
                     }
-                    if(gp.ui.commandNum == 3) {
+                    if(gp.ui.commandNum == 3) { //SORCERER
                         gp.ui.titleScreenState = 0;
                     }
                 }

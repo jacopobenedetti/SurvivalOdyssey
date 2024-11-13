@@ -3,6 +3,8 @@ package main;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import item.ITM_Heart;
+import item.SuperItem;
 import res.ResourcePath;
 
 import java.awt.BasicStroke;
@@ -13,6 +15,7 @@ public class UI {
 
     GamePanel gp;
     Graphics2D g2;
+    BufferedImage heart_full, heart_half, heart_blank;
     Font uiFont = ResourcePath.UI_FONT;
     Font dialogueFont = ResourcePath.DIALOGUE_FONT_0;
     Font titleFont = ResourcePath.DIALOGUE_FONT_4;
@@ -34,6 +37,12 @@ public class UI {
     public UI(GamePanel gp) {
 
         this.gp = gp;
+
+        // CREATE HUD ITEMS
+        SuperItem heart = new ITM_Heart(gp);
+        heart_full = heart.image;
+        heart_half = heart.image2;
+        heart_blank = heart.image3;
 
     }
     
@@ -60,18 +69,55 @@ public class UI {
 
         // PLAY STATE
         if(gp.gameState == gp.playState) {
-            // DO PLAYSTATE STUFF
+            drawPlayerLife();
         }
 
         //PAUSE STATE
         if(gp.gameState == gp.pauseState) {
+            drawPlayerLife();
             drawPauseScreen();
         }
 
         //DIALOGUE STATE
         if(gp.gameState == gp.dialogueState) {
+            drawPlayerLife();
             drawDialogueScreen();
         }
+    }
+
+    public void drawPlayerLife() {
+
+        gp.player.life = 5;
+
+        int x = gp.tileSize / 2;
+        int y = gp.tileSize / 2;
+        int i = 0;
+
+        // DRAW MAX LIFE
+        while (i < gp.player.maxLife / 2) {
+
+            g2.drawImage(heart_blank, x, y, null);
+            i++;
+            x += gp.tileSize;
+        }
+
+        //RESET
+        x = gp.tileSize / 2;
+        y = gp.tileSize / 2;
+        i = 0;
+
+        //DRAW CURRENT LIFE
+        while(i < gp.player.life) {
+            g2.drawImage(heart_half, x, y, null);
+            i++;
+            if(i < gp.player.life) {
+                g2.drawImage(heart_full, x, y, null);
+            }
+            i++;
+            x += gp.tileSize;
+        }
+
+
     }
 
     public void drawDialogueScreen() {
