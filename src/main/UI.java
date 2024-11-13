@@ -78,6 +78,7 @@ public class UI {
         drawSubWindow(x, y, width, height);
 
         g2.setFont(dialogueFont);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 16F));
         x += gp.tileSize;
         y += gp.tileSize;
 
