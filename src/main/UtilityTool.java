@@ -41,4 +41,12 @@ public class UtilityTool {
         return x;
     }
 
+    /*
+    public void writeString (String text, Graphics2D g2, , Font font) {
+
+
+    }
+
+    */
+
 }

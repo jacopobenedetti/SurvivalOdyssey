@@ -52,6 +52,10 @@ public class Player extends Entity {
         speed = 4;
         direction = "down";
 
+        // PLAYER STATUS
+        maxLife = 6; // 1 means half heart, 2 means 1 complete heart
+        life = maxLife;
+
     }
 
     public void getPlayerImage() {

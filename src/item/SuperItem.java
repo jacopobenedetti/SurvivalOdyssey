@@ -12,9 +12,10 @@ public class SuperItem {
 
     // Directory path for item images and file extension for image files
     String path = ResourcePath.ITEMS_IMAGE_PATH;
+    String heartPath = ResourcePath.HEART_IMAGE_PATH;
     String imageExtension = ResourcePath.fileImageExtension;
 
-    public BufferedImage image;
+    public BufferedImage image, image2, image3;
     public String name;
     public boolean collision = false;
     public int worldX, worldY;
