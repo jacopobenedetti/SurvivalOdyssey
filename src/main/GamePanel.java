@@ -32,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
     // SYSTEM
     TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
+    public EventHandler eHandler = new EventHandler(this);
     Sound music = new Sound();
     Sound soundEffect = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
@@ -68,7 +69,7 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setNPC();
         //playMusic(0); // SOUNDTRACK
         gameState = titleState;
-
+        
     }
 
     public void startGameThread() {
@@ -107,6 +108,7 @@ public class GamePanel extends JPanel implements Runnable {
         if (gameState == playState) {
             // PLAYER
             player.update();
+            System.out.println("X: " + (player.worldX / tileSize) + 1 + "\nY: " + (player.worldY / tileSize) + 1);
             // NPC
             for (int i = 0; i < npc.length; i++) {
                 if (npc[i] != null) {

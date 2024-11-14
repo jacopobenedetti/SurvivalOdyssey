@@ -15,7 +15,6 @@ public class ITM_Heart extends SuperItem {
         name = "Heart";
         
         try {
-            System.out.println(heartPath + "heart_full" + imageExtension);
             image = ImageIO.read(getClass().getResourceAsStream(heartPath + "heart_full" + imageExtension));
             image2 = ImageIO.read(getClass().getResourceAsStream(heartPath + "heart_half" + imageExtension));
             image3 = ImageIO.read(getClass().getResourceAsStream(heartPath + "heart_blank" + imageExtension));
