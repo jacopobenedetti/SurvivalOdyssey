@@ -3,8 +3,8 @@ package main;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import entity.Entity;
 import item.ITM_Heart;
-import item.SuperItem;
 import res.ResourcePath;
 
 import java.awt.BasicStroke;
@@ -36,7 +36,7 @@ public class UI {
         this.gp = gp;
 
         // CREATE HUD ITEMS
-        SuperItem heart = new ITM_Heart(gp);
+        Entity heart = new ITM_Heart(gp);
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;

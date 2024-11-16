@@ -8,3 +8,4 @@ public class EventRect extends Rectangle {
     boolean eventDone = false;
 
 }
+ 

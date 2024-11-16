@@ -5,6 +5,8 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import main.GamePanel;
+import main.UtilityTool;
+import res.ResourcePath;
 
 public class Entity {
     
@@ -13,7 +15,7 @@ public class Entity {
     public int speed;
 
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
-    public String direction;
+    public String direction = "down";
 
     public int spriteCounter = 0;
     public int spriteNum = 1;
@@ -29,6 +31,18 @@ public class Entity {
     // CHARACTER STATUS
     public int maxLife;
     public int life;
+
+    //EX SUPER ITEM
+    public String itemsPtah = ResourcePath.ITEMS_IMAGE_PATH;
+    public String path = ResourcePath.ITEMS_IMAGE_PATH;
+    public String heartPath = ResourcePath.HEART_IMAGE_PATH;
+    public String imageExtension = ResourcePath.fileImageExtension;
+
+    public BufferedImage image, image2, image3;
+    public String name;
+    public boolean collision = false;
+
+    public UtilityTool uTool = new UtilityTool();
     
     public Entity (GamePanel gp) {
         this.gp = gp;
