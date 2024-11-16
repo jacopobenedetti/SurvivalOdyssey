@@ -1,24 +1,17 @@
 package item;
 
-import java.io.IOException;
-import javax.imageio.ImageIO;
-
+import entity.Entity;
 import main.GamePanel;
 
-public class ITM_Chest extends SuperItem {
+public class ITM_Chest extends Entity {
 
     GamePanel gp;
 
     public ITM_Chest(GamePanel gp) {
-        
+        super(gp);
+
         name = "Chest";
-        
-        try {
-            image = ImageIO.read(getClass().getResourceAsStream(path + name + imageExtension));
-            uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        down1 = uTool.setupImage(itemsPtah, name, imageExtension, gp);
 
 
     }

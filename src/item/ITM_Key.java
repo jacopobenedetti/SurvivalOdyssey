@@ -1,23 +1,16 @@
 package item;
 
-import java.io.IOException;
-import javax.imageio.ImageIO;
-
+import entity.Entity;
 import main.GamePanel;
 
-public class ITM_Key extends SuperItem {
+public class ITM_Key extends Entity {
 
     GamePanel gp;
     
     public ITM_Key(GamePanel gp) {
-        
-        name = "Key";
-        
-        try {
-            image = ImageIO.read(getClass().getResourceAsStream(path + name + imageExtension));
-            uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        super(gp);
+
+        name = "Boots";
+        down1 = uTool.setupImage(itemsPtah, name, imageExtension, gp);
     }
 }

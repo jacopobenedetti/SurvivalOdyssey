@@ -1,32 +1,17 @@
 package item;
 
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
+import entity.Entity;
 import main.GamePanel;
 
-public class ITM_Heart extends SuperItem {
-
-    GamePanel gp;
+public class ITM_Heart extends Entity {
 
     public ITM_Heart(GamePanel gp) {
-
-        name = "Heart";
+        super(gp);
         
-        try {
-            System.out.println(heartPath + "heart_full" + imageExtension);
-            image = ImageIO.read(getClass().getResourceAsStream(heartPath + "heart_full" + imageExtension));
-            image2 = ImageIO.read(getClass().getResourceAsStream(heartPath + "heart_half" + imageExtension));
-            image3 = ImageIO.read(getClass().getResourceAsStream(heartPath + "heart_blank" + imageExtension));
-            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-            image2 = uTool.scaleImage(image2, gp.tileSize, gp.tileSize);
-            image3 = uTool.scaleImage(image3, gp.tileSize, gp.tileSize);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        collision = true;
+        name = "Heart";
+        image = uTool.setupImage(heartPath, "heart_full", imageExtension, gp);
+        image2 = uTool.setupImage(heartPath, "heart_half", imageExtension, gp);
+        image3 = uTool.setupImage(heartPath, "heart_blank", imageExtension, gp);
         
     }
 }

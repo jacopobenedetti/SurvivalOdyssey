@@ -3,8 +3,8 @@ package main;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import entity.Entity;
 import item.ITM_Heart;
-import item.SuperItem;
 import res.ResourcePath;
 
 import java.awt.BasicStroke;
@@ -31,28 +31,24 @@ public class UI {
     public int commandNum = 0;
     public int titleScreenState = 0;
 
-
-
-
     public UI(GamePanel gp) {
 
         this.gp = gp;
 
         // CREATE HUD ITEMS
-        SuperItem heart = new ITM_Heart(gp);
+        Entity heart = new ITM_Heart(gp);
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;
 
     }
-    
+
     public void showMessage(String text) {
 
         message = text;
         messageOn = true;
 
     }
-
 
     public void draw(Graphics2D g2) {
 
@@ -61,33 +57,31 @@ public class UI {
         g2.setFont(uiFont);
         g2.setColor(Color.white);
 
-        //TITLE STATE
+        // TITLE STATE
 
-        if(gp.gameState == gp.titleState) {
+        if (gp.gameState == gp.titleState) {
             drawTitleScreen();
-        } 
+        }
 
         // PLAY STATE
-        if(gp.gameState == gp.playState) {
+        if (gp.gameState == gp.playState) {
             drawPlayerLife();
         }
 
-        //PAUSE STATE
-        if(gp.gameState == gp.pauseState) {
+        // PAUSE STATE
+        if (gp.gameState == gp.pauseState) {
             drawPlayerLife();
             drawPauseScreen();
         }
 
-        //DIALOGUE STATE
-        if(gp.gameState == gp.dialogueState) {
+        // DIALOGUE STATE
+        if (gp.gameState == gp.dialogueState) {
             drawPlayerLife();
             drawDialogueScreen();
         }
     }
 
     public void drawPlayerLife() {
-
-        gp.player.life = 5;
 
         int x = gp.tileSize / 2;
         int y = gp.tileSize / 2;
@@ -101,28 +95,27 @@ public class UI {
             x += gp.tileSize;
         }
 
-        //RESET
+        // RESET
         x = gp.tileSize / 2;
         y = gp.tileSize / 2;
         i = 0;
 
-        //DRAW CURRENT LIFE
-        while(i < gp.player.life) {
+        // DRAW CURRENT LIFE
+        while (i < gp.player.life) {
             g2.drawImage(heart_half, x, y, null);
             i++;
-            if(i < gp.player.life) {
+            if (i < gp.player.life) {
                 g2.drawImage(heart_full, x, y, null);
             }
             i++;
             x += gp.tileSize;
         }
 
-
     }
 
     public void drawDialogueScreen() {
 
-        //WINDOW
+        // WINDOW
         int x = gp.tileSize * 2;
         int y = gp.tileSize / 2;
         int width = gp.screenWidth - (gp.tileSize * 4);
@@ -135,12 +128,13 @@ public class UI {
         x += gp.tileSize;
         y += gp.tileSize;
 
-        /* 
-        for(String line: currentDialogue.split("\n")) { // EVERYTIME THER IS "\n" SIMBOL (IT CAN BE CHANGED), IT GOES TO THE TOP
-            g2.drawString(line, x, y);
-            y += 40;
-        }
-        */
+        /*
+         * for(String line: currentDialogue.split("\n")) { // EVERYTIME THER IS "\n"
+         * SIMBOL (IT CAN BE CHANGED), IT GOES TO THE TOP
+         * g2.drawString(line, x, y);
+         * y += 40;
+         * }
+         */
 
         g2.drawString(currentDialogue, x, y);
 
@@ -162,18 +156,18 @@ public class UI {
         g2.setFont(uiFont);
         String text = "PAUSED";
         int x = uTool.getXforCenteredText(text, g2, gp);
-        int y = gp.screenHeight/2;
+        int y = gp.screenHeight / 2;
 
         g2.drawString(text, x, y);
     }
 
     public void drawTitleScreen() {
 
-        if(titleScreenState == 0) {
+        if (titleScreenState == 0) {
 
             g2.setColor(new Color(0, 0, 0));
             g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
-            //TITLE NAME
+            // TITLE NAME
             g2.setFont(titleFont);
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 48F));
 
@@ -182,30 +176,29 @@ public class UI {
             int x = uTool.getXforCenteredText(text, g2, gp);
             int y = gp.tileSize * 3;
 
-            //SHADOW
+            // SHADOW
             g2.setColor(Color.gray);
             g2.drawString(text, x + 3, y + 3);
 
-            //MAIN COLOR
+            // MAIN COLOR
             g2.setColor(Color.white);
             g2.drawString(text, x, y);
 
-            //DAVID IMAGE
+            // DAVID IMAGE
             x = gp.screenWidth / 2 - (gp.tileSize * 2) / 2;
-            y += gp.tileSize * 2; 
+            y += gp.tileSize * 2;
 
             BufferedImage image = uTool.setupImage(imageDavid, "david", ".png", gp);
             g2.drawImage(image, x, y, gp.tileSize * 2, gp.tileSize * 2, null);
 
-
-            //MENU
+            // MENU
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 24F));
 
             text = "New Game";
             x = uTool.getXforCenteredText(text, g2, gp);
-            y += gp.tileSize * 3.5 ;
+            y += gp.tileSize * 3.5;
             g2.drawString(text, x, y);
-            if(commandNum == 0) {
+            if (commandNum == 0) {
                 g2.drawString(">", x - gp.tileSize, y);
             }
 
@@ -213,7 +206,7 @@ public class UI {
             x = uTool.getXforCenteredText(text, g2, gp);
             y += gp.tileSize;
             g2.drawString(text, x, y);
-            if(commandNum == 1) {
+            if (commandNum == 1) {
                 g2.drawString(">", x - gp.tileSize, y);
             }
 
@@ -221,10 +214,10 @@ public class UI {
             x = uTool.getXforCenteredText(text, g2, gp);
             y += gp.tileSize;
             g2.drawString(text, x, y);
-            if(commandNum == 2) {
+            if (commandNum == 2) {
                 g2.drawString(">", x - gp.tileSize, y);
             }
-        } else if(titleScreenState == 1) {
+        } else if (titleScreenState == 1) {
 
             g2.setFont(dialogueFont);
             g2.setColor(Color.white);
@@ -244,33 +237,33 @@ public class UI {
             x = uTool.getXforCenteredText(text, g2, gp);
             y += gp.tileSize * 3;
             g2.drawString(text, x, y);
-            if(commandNum == 0) {
+            if (commandNum == 0) {
                 g2.drawString(">", x - gp.tileSize, y);
-            } 
+            }
 
             text = "Thief";
             x = uTool.getXforCenteredText(text, g2, gp);
             y += gp.tileSize;
-            g2.drawString(text, x, y); 
-            if(commandNum == 1) {
+            g2.drawString(text, x, y);
+            if (commandNum == 1) {
                 g2.drawString(">", x - gp.tileSize, y);
-            } 
+            }
 
             text = "Sorcerer";
             x = uTool.getXforCenteredText(text, g2, gp);
             y += gp.tileSize;
             g2.drawString(text, x, y);
-            if(commandNum == 2) {
+            if (commandNum == 2) {
                 g2.drawString(">", x - gp.tileSize, y);
             }
 
             text = "Back";
             x = uTool.getXforCenteredText(text, g2, gp);
-            y += gp.tileSize * 2;   
+            y += gp.tileSize * 2;
             g2.drawString(text, x, y);
-            if(commandNum == 3) {
+            if (commandNum == 3) {
                 g2.drawString(">", x - gp.tileSize, y);
-            } 
+            }
         }
     }
 }
