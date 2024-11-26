@@ -2,10 +2,20 @@ package main;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.awt.Font;
+import java.awt.FontFormatException;
 
 import javax.imageio.ImageIO;
 
+import res.ResourcePath;
+
 public class UtilityTool {
+
+    static String fontPath = ResourcePath.FONT_PATH;
+    static String fileFontExtension = ResourcePath.fileFontExtension;
+
 
     
     public BufferedImage scaleImage(BufferedImage original, int width, int height) {
@@ -39,6 +49,21 @@ public class UtilityTool {
         int x = gp.screenWidth/2 - length/2;
         
         return x;
+    }
+
+    public static Font importFont(Font font, String fileName) {
+
+        InputStream is = ResourcePath.class.getResourceAsStream(fontPath + fileName + fileFontExtension);
+
+        try {
+            font = Font.createFont(Font.TRUETYPE_FONT, is);
+        } catch (FontFormatException e) {
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return font;
     }
 
     /*

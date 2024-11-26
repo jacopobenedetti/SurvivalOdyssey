@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -98,6 +99,10 @@ public class Player extends Entity {
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
 
+            //CHECK MONSTER COLLISION
+            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+            contactMonster(monsterIndex);
+
             // CHECK EVENT COLLISION
             gp.eHandler.checkEvent();
 
@@ -130,9 +135,15 @@ public class Player extends Entity {
                 }
                 spriteCounter = 0;
             }
-
         }
-
+         
+        if(invincible) {
+            invincibleCounter++;
+            if(invincibleCounter > 60){
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
     }
 
     public void pickUpItem(int i) {
@@ -148,6 +159,16 @@ public class Player extends Entity {
             if (gp.keyH.enterPressed) {
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
+            }
+        }
+    }
+
+    public void contactMonster(int i) {
+
+        if(i != 999) {
+            if(!invincible) {
+                life -= 1;
+                invincible = true; 
             }
         }
     }
@@ -190,8 +211,14 @@ public class Player extends Entity {
                 }
                 break;
         }
+        if(invincible) {
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+
+        }
 
         g2.drawImage(image, screenX, screenY, null);
-    }
 
+        // RESET ALPHA
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+    }
 }

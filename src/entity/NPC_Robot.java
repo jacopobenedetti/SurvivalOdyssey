@@ -21,6 +21,7 @@ public class NPC_Robot extends Entity {
 
         getImage();
         setDialogue();
+        
     }
 
     public void getImage() {
