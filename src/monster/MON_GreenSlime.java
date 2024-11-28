@@ -6,6 +6,7 @@ import entity.Entity;
 import main.GamePanel;
 import main.UtilityTool;
 import res.ResourcePath;
+import res.tile.Tile;
 
 public class MON_GreenSlime extends Entity {
 
@@ -13,6 +14,7 @@ public class MON_GreenSlime extends Entity {
     UtilityTool uTool = new UtilityTool();
     String monsterPath = ResourcePath.MONSTER_IMAGE_PATH;
     GamePanel gp;
+    public Tile[] tile;
 
     public MON_GreenSlime(GamePanel gp) {
 
@@ -61,20 +63,18 @@ public class MON_GreenSlime extends Entity {
             if (i <= 25) {
                 direction = "up";
             }
-
             if (i > 25 && i <= 50) {
                 direction = "down";
             }
-
             if (i > 50 && i <= 75) {
                 direction = "left";
             }
-
             if (i > 75) {
                 direction = "right";
             }
 
             actionLockCounter = 0;
+            
         }
     }
 }

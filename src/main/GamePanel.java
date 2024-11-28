@@ -12,7 +12,7 @@ import java.util.Comparator;
 import javax.swing.JPanel;
 
 import entity.*;
-import tile.TileManager;
+import res.tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -27,8 +27,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
     // WORLD SETTING
-    public final int maxWorldCol = 50;
-    public final int maxWorldRow = 50;
+    public int maxWorldCol;
+    public int maxWorldRow;
 
     // FPS
     int FPS = 60;
@@ -115,7 +115,7 @@ public class GamePanel extends JPanel implements Runnable {
         if (gameState == playState) {
             // PLAYER
             player.update();
-            System.out.println("X: " + (player.worldX / tileSize) + 1 + "\nY: " + (player.worldY / tileSize) + 1);
+            //System.out.println("X: " + (player.worldX / tileSize) + 1 + "\nY: " + (player.worldY / tileSize) + 1);
             // NPC
             for (int i = 0; i < npc.length; i++) {
                 if (npc[i] != null) {
