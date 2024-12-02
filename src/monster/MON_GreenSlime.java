@@ -6,7 +6,7 @@ import entity.Entity;
 import main.GamePanel;
 import main.UtilityTool;
 import res.ResourcePath;
-import res.tile.Tile;
+import tile.Tile;
 
 public class MON_GreenSlime extends Entity {
 

@@ -29,7 +29,7 @@ false
 sea_sand_border_angle_left_bottom
 true
 sea_border_sand_bottom
-false
+true
 rock
 true
 sea_sand_turn_right_top

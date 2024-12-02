@@ -12,7 +12,7 @@ import java.util.Comparator;
 import javax.swing.JPanel;
 
 import entity.*;
-import res.tile.TileManager;
+import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -29,6 +29,9 @@ public class GamePanel extends JPanel implements Runnable {
     // WORLD SETTING
     public int maxWorldCol;
     public int maxWorldRow;
+    public int worldWidth;
+    public int worldHeight;
+    
 
     // FPS
     int FPS = 60;
@@ -66,7 +69,13 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+        setupWorlddimensions();
 
+    }
+
+    public void setupWorlddimensions() {
+        worldWidth = tileSize * maxWorldCol;
+        worldHeight = tileSize * maxWorldRow;
     }
 
     public void setupGame() {
