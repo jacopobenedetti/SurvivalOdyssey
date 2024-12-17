@@ -9,9 +9,9 @@ public class ITM_Heart extends Entity {
         super(gp);
         
         name = "Heart";
-        image = uTool.setupImage(heartPath, "heart_full", imageExtension, gp);
-        image2 = uTool.setupImage(heartPath, "heart_half", imageExtension, gp);
-        image3 = uTool.setupImage(heartPath, "heart_blank", imageExtension, gp);
+        image = uTool.setupImage(heartPath, "heart_full", imageExtension, gp, gp.tileSize, gp.tileSize);
+        image2 = uTool.setupImage(heartPath, "heart_half", imageExtension, gp, gp.tileSize, gp.tileSize);
+        image3 = uTool.setupImage(heartPath, "heart_blank", imageExtension, gp, gp.tileSize, gp.tileSize);
         
     }
 }

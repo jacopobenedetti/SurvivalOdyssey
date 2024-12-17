@@ -27,14 +27,14 @@ public class UtilityTool {
         return scaledImage;
     }
 
-    public BufferedImage setupImage (String path, String imageName, String extension, GamePanel gp) {
+    public BufferedImage setupImage (String path, String imageName, String extension, GamePanel gp, int width, int height) {
 
         BufferedImage image = null;
 
         try {
 
             image = ImageIO.read(getClass().getResourceAsStream(path + imageName + extension));
-            image = scaleImage(image, gp.tileSize, gp.tileSize);
+            image = scaleImage(image, width, height);
 
         } catch (Exception e) {
             e.printStackTrace();

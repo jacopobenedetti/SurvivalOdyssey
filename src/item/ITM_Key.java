@@ -11,6 +11,6 @@ public class ITM_Key extends Entity {
         super(gp);
 
         name = "Boots";
-        down1 = uTool.setupImage(itemsPtah, name, imageExtension, gp);
+        down1 = uTool.setupImage(itemsPtah, name, imageExtension, gp, gp.tileSize, gp.tileSize);
     }
 }

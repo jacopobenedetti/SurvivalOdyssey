@@ -188,7 +188,7 @@ public class UI {
             x = gp.screenWidth / 2 - (gp.tileSize * 2) / 2;
             y += gp.tileSize * 2;
 
-            BufferedImage image = uTool.setupImage(imageDavid, "david", ".png", gp);
+            BufferedImage image = uTool.setupImage(imageDavid, "david", ".png", gp, gp.tileSize * 2, gp.tileSize * 2);
             g2.drawImage(image, x, y, gp.tileSize * 2, gp.tileSize * 2, null);
 
             // MENU

@@ -26,14 +26,14 @@ public class NPC_Robot extends Entity {
 
     public void getImage() {
 
-        up1 = uTool.setupImage(path, "oldman_up_1", imageExtension, gp);
-        up2 = uTool.setupImage(path, "oldman_up_2", imageExtension, gp);
-        down1 = uTool.setupImage(path, "oldman_down_1", imageExtension, gp);
-        down2 = uTool.setupImage(path, "oldman_down_2", imageExtension, gp);
-        left1 = uTool.setupImage(path, "oldman_left_1", imageExtension, gp);
-        left2 = uTool.setupImage(path, "oldman_left_2", imageExtension, gp);
-        right1 = uTool.setupImage(path, "oldman_right_1", imageExtension, gp);
-        right2 = uTool.setupImage(path, "oldman_right_2", imageExtension, gp);
+        up1 = uTool.setupImage(path, "oldman_up_1", imageExtension, gp, gp.tileSize, gp.tileSize);
+        up2 = uTool.setupImage(path, "oldman_up_2", imageExtension, gp, gp.tileSize, gp.tileSize);
+        down1 = uTool.setupImage(path, "oldman_down_1", imageExtension, gp, gp.tileSize, gp.tileSize);
+        down2 = uTool.setupImage(path, "oldman_down_2", imageExtension, gp, gp.tileSize, gp.tileSize);
+        left1 = uTool.setupImage(path, "oldman_left_1", imageExtension, gp, gp.tileSize, gp.tileSize);
+        left2 = uTool.setupImage(path, "oldman_left_2", imageExtension, gp, gp.tileSize, gp.tileSize);
+        right1 = uTool.setupImage(path, "oldman_right_1", imageExtension, gp, gp.tileSize, gp.tileSize);
+        right2 = uTool.setupImage(path, "oldman_right_2", imageExtension, gp, gp.tileSize, gp.tileSize);
 
     }
 

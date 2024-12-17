@@ -9,7 +9,7 @@ public class ITM_Boots extends Entity {
         super(gp);
 
         name = "Boots";
-        down1 = uTool.setupImage(itemsPtah, name, imageExtension, gp);
+        down1 = uTool.setupImage(itemsPtah, name, imageExtension, gp, gp.tileSize, gp.tileSize);
         
     }
 }

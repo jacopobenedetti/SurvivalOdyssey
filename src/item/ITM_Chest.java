@@ -11,7 +11,7 @@ public class ITM_Chest extends Entity {
         super(gp);
 
         name = "Chest";
-        down1 = uTool.setupImage(itemsPtah, name, imageExtension, gp);
+        down1 = uTool.setupImage(itemsPtah, name, imageExtension, gp, gp.tileSize, gp.tileSize);
 
 
     }
